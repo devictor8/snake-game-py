@@ -3,40 +3,41 @@ imageHeight = Snake.IMAGE.get_height()
 imageWidth = Snake.IMAGE.get_width()
 
 def checkDirection(direction, body):
-    if body[1].y <= body[0].y or body[0].y == 0:
-        return "down"
-    if body[1].y >= body[0].y or body[0].y == 400:
-        return "up"
-    if body[1].x <= body[0].x or body[0].x == 0:
-        return "right"
-    if body[1].x >= body[0].x or body[0].x == 800:
-        return "left"
-    return direction
+    if body[1].y <= body[0].y and direction == "down":
+        return True
+    elif body[1].y >= body[0].y and direction == "up":
+        return True
+    elif body[1].x <= body[0].x and direction == "right":
+        return True
+    elif body[1].x >= body[0].x and direction == "left":
+        return True
+    else:
+        return False
 
 def goDown(body):
-    y = body[0].y + imageHeight if body[0].y + imageHeight <= 400 else 0
+    y = body[0].y + imageHeight
     
-    if body[1].y <= body[0].y or body[0].y == 0:
-        body.insert(0, Snake(body[0].x, y))
+    if checkDirection("down", body):
+        body.insert(0, Snake(body[0].x, y, body[0].score))
         body.pop()
 
 def goUp(body):
-    y = body[0].y - imageHeight if body[0].y - imageHeight >= 0 else 400
+    y = body[0].y - imageHeight
 
-    if body[1].y >= body[0].y or body[0].y == 400:
-        body.insert(0, Snake(body[0].x, y))
+    if checkDirection("up", body):
+        body.insert(0, Snake(body[0].x, y, body[0].score))
         body.pop()
 
 def goRight(body):
-    x = body[0].x + imageWidth if body[0].x + imageWidth <= 800 else 0
+    x = body[0].x + imageWidth
 
-    if body[1].x <= body[0].x or body[0].x == 0: 
-        body.insert(0, Snake(x, body[0].y))
+    if checkDirection("right", body): 
+        body.insert(0, Snake(x, body[0].y, body[0].score))
         body.pop()
 
 def goLeft(body):
-    x = body[0].x - imageWidth if body[0].x - imageWidth >= 0 else 800
+    x = body[0].x - imageWidth
     
-    if body[1].x >= body[0].x or body[0].x == 800:
-        body.insert(0, Snake(x, body[0].y))
+    if checkDirection("left", body):
+        body.insert(0, Snake(x, body[0].y, body[0].score))
         body.pop()

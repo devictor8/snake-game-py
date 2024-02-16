@@ -34,7 +34,6 @@ class Snake:
             score_text = font.render(f"score: {self.score}", True, (255,255,255))
             screen.blit(score_text, (50, 50))
     
-
 class Food: 
     IMAGE = pygame.image.load("./assets/food.png")
 
